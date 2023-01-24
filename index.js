@@ -12,13 +12,13 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 async function run() {
 
-    const studentCollection = client.db("student").collection("allStudentData")
+    const studentCollection = client.db("student").collection("student-data")
 
     try {
-        app.get("/user", (req, res) => {
+        app.get('/user', async (req, res) => {
             const query = {}
-            const result = studentCollection.find(query)
-            res.send(result)
+            const reslut = await studentCollection.find(query).toArray()
+            res.send(reslut)
         })
     }
     finally { }
